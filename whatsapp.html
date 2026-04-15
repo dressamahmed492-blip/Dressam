@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فتح واتساب</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  text-align:center;
+  font-family:'Cairo', sans-serif;
+  padding-top:100px;
+}
+
+.loader{
+  border:5px solid #1e293b;
+  border-top:5px solid #25D366;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  margin:20px auto;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+button{
+  padding:15px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:20px;
+  background:#25D366;
+  color:white;
+  margin-top:20px;
+}
+</style>
+
+<script>
+function openWhatsApp(){
+
+  var phone = "201146391460";
+  var message = "مرحبا أريد حجز جلسة";
+
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  var isAndroid = /android/i.test(userAgent);
+  var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+  var appURL = "whatsapp://send?phone=" + phone + "&text=" + encodeURIComponent(message);
+  var webURL = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + encodeURIComponent(message);
+
+  if(isAndroid){
+    // Android: حاول التطبيق الأول
+    window.location.href = appURL;
+
+    setTimeout(function(){
+      window.location.href = webURL;
+    }, 1000);
+
+  } else if(isIOS){
+    // iPhone: الأفضل web
+    window.location.href = webURL;
+
+  } else {
+    // أي جهاز تاني
+    window.location.href = webURL;
+  }
+}
+</script>
+
+</head>
+
+<body onload="openWhatsApp()">
+
+<h2>جاري فتح واتساب...</h2>
+
+<div class="loader"></div>
+
+<p>لو لم يتم التحويل تلقائيًا:</p>
+
+<button onclick="openWhatsApp()">اضغط هنا</button>
+
+</body>
+</html>

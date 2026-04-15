@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إجراء مكالمة</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  text-align:center;
+  font-family:'Cairo', sans-serif;
+  padding-top:100px;
+}
+
+.loader{
+  border:5px solid #1e293b;
+  border-top:5px solid #22c55e;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  margin:20px auto;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+button{
+  padding:15px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:20px;
+  background:#22c55e;
+  color:white;
+  margin-top:20px;
+}
+</style>
+
+<script>
+function makeCall(){
+
+  var phone = "+201146391460";
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  var isAndroid = /android/i.test(userAgent);
+  var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+  var telURL = "tel:" + phone;
+
+  if(isAndroid){
+    // Android: حاول الاتصال مباشرة
+    window.location.href = telURL;
+
+  } else if(isIOS){
+    // iPhone: نفس الفكرة
+    window.location.href = telURL;
+
+  } else {
+    // Desktop أو أجهزة أخرى
+    window.location.href = telURL;
+  }
+}
+</script>
+
+</head>
+
+<body onload="makeCall()">
+
+<h2>جاري فتح الاتصال...</h2>
+
+<div class="loader"></div>
+
+<p>لو لم يتم التحويل تلقائيًا:</p>
+
+<button onclick="makeCall()">اتصل الآن</button>
+
+</body>
+</html>
